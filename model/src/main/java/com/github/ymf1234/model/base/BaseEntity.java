@@ -33,7 +33,7 @@ public class BaseEntity implements Serializable {
      *
      */
     @TableId(type = IdType.AUTO)
-    private int id;
+    private Long id;
 
     // 创建时间
     @TableField("create_time")
@@ -47,7 +47,7 @@ public class BaseEntity implements Serializable {
     @TableField("is_deleted")
     private Integer isDeleted;
 
-    @TableField(exist = false)
-    private Map<String,Object> param = new HashMap<>();
+//    @TableField(exist = false)
+//    private Map<String,Object> param = new HashMap<>();
 
 }

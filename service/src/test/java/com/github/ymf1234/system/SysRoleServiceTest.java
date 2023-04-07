@@ -2,70 +2,56 @@ package com.github.ymf1234.system;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.ymf1234.model.system.SysRole;
-import com.github.ymf1234.system.mapper.SysRoleMapper;
+import com.github.ymf1234.system.service.SysRoleService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
-public class SysRoleMapperTest {
+public class SysRoleServiceTest {
 
     @Autowired
-    private SysRoleMapper sysRoleMapper;
+    private SysRoleService sysRoleService;
 
-    // 列表
     @Test
     public void testSelectList() {
         System.out.println(("----- selectAll method test ------"));
         //UserMapper 中的 selectList() 方法的参数为 MP 内置的条件封装器 Wrapper
         //所以不填写就是无任何条件
-        List<SysRole> sysRoles = sysRoleMapper.selectList(null);
-        for (SysRole sysRole : sysRoles) {
-            System.out.println("sysRole = " + sysRole);
+        List<SysRole> list = sysRoleService.list();
+        for (SysRole role :
+                list) {
+            System.out.println("role = " + role);
         }
     }
 
-    // 添加
     @Test
     public void testInsert() {
         SysRole sysRole = new SysRole();
-        sysRole.setRoleName("管理员");
+        sysRole.setRoleName("角色管理员");
         sysRole.setRoleCode("role");
         sysRole.setDescription("角色管理员");
-        System.out.println(sysRole);
-        int result = sysRoleMapper.insert(sysRole);
-        System.out.println(result); //影响的行数
-        System.out.println(sysRole.getId()); //id自动回填
+
+        boolean result = sysRoleService.save(sysRole);
+        System.out.println(result); //成功还是失败
     }
 
-    // 更新
     @Test
-    public void testUpdateById() {
+    public void testUpdateById(){
         SysRole sysRole = new SysRole();
+        sysRole.setId(10L);
+        sysRole.setRoleName("角色管理员1");
 
-        sysRole.setId(9L);
-
-        sysRole.setRoleName("管理员2");
-
-        int result = sysRoleMapper.updateById(sysRole);
+        boolean result = sysRoleService.updateById(sysRole);
         System.out.println(result);
+
     }
 
-    // 删除
     @Test
-    public void testDeleteBatchId() {
-        int result = sysRoleMapper.deleteById(9L);
-        System.out.println(result);
-    }
-
-    // 批量删除
-    @Test
-    public void testDeleteBatchIds() {
-        int result = sysRoleMapper.deleteBatchIds(Arrays.asList(8, 9));
+    public void testDeleteById(){
+        boolean result = sysRoleService.removeById(10L);
         System.out.println(result);
     }
 
@@ -73,7 +59,7 @@ public class SysRoleMapperTest {
     public void testQueryWrapper() {
         QueryWrapper<SysRole> queryWrapper = new QueryWrapper<>();
         queryWrapper.ge("role_code", "role");
-        List<SysRole> users = sysRoleMapper.selectList(queryWrapper);
+        List<SysRole> users = sysRoleService.list(queryWrapper);
         System.out.println(users);
     }
 }

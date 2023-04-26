@@ -5,5 +5,5 @@ import com.github.ymf1234.model.system.SysUser;
 import com.github.ymf1234.system.mapper.SysUserMapper;
 import com.github.ymf1234.system.service.SysRoleService;
 
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysRoleService {
-}
+//public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysRoleService {
+//}

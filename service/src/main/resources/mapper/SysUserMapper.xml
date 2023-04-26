@@ -9,7 +9,22 @@
     <!--    条件分页查询-->
     <select id="selectPage" resultMap="UserMap">
         select
-        <include refid="columns">
-        </include>
+            <include refid="columns"/> 
+        from sys_user
+        <where>
+            <if test="vo.keyword != null and vo.keyword !=''">
+                (username like concat('%',#{vo.keyword},'%') or
+                 name  like concat('%',#{vo.keyword},'%') or
+                 phone like concat('%',#{vo.keyword},'%'))
+            </if>
+            <if test="vo.createTimeBegin != null and vo.createTimeBegin">
+                and create_time >= #{vo.createTimeBegin}
+            </if>
+            <if test="vo.createTimeEnd != null and vo.createTimeEnd != ''">
+                and create_time &lt;= #{ov.createTimeEnd}
+            </if>
+            and is_deleted = 0
+        </where>
+        order by id desc
     </select>
 </mapper>

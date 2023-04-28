@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.github.ymf1234.mapper")
 public class MybatisPlusConfig {
     @Bean
     public MybatisPlusInterceptor addPaginationInnerInterceptor() {

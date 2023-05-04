@@ -1,20 +1,21 @@
 package com.github.ymf1234.model.vo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class SysUserQueryVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String roleName;
+    private String keyword;
 
+    private String createTimeBegin;
 
-    public String getRoleName() {
-        return roleName;
-    }
+    private String createTimeEnd;
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
+    private Long roleId;
+    private Long postId;
+    private Long deptId;
 
 }

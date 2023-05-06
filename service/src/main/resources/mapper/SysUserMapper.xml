@@ -9,7 +9,7 @@
     <!--    条件分页查询-->
     <select id="selectPage" resultMap="UserMap">
         select
-            <include refid="columns"/> 
+            <include refid="columns"/>
         from sys_user
         <where>
             <if test="vo.keyword != null and vo.keyword !=''">
